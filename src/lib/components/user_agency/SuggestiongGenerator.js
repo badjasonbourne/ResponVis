@@ -10,7 +10,6 @@ class SuggestionsGenerator {
         this.fillTradeoffMatrix();
     }
     
-    // 创建一个二维数组，用来存储每个view之间的tradeoff,  并将所有的值初始化为undefined
     fillTradeoffMatrix() {
         this.tradeoffMatrix = new Array(this.views.length);
         for (let i = 0; i < this.views.length; i++) {
@@ -44,7 +43,7 @@ class SuggestionsGenerator {
                     `${currentSug.fadingElement} in ${currentSug.viewName} ${currentSug.operator} 
                     ${currentSug.threshold}, which means ${currentSug.issue}`,
                 suggestedReason:
-                    "I recommend you to switch to " + bestSug.viewName,
+                    `I recommend you to switch to ${bestSug.viewName}, ${bestSug.advantage}`,
                 treadoff: this.tradeoffMatrix[currentView][bestView]
             };
             return;
