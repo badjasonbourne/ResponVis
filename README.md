@@ -4,7 +4,7 @@
 npm install
 ```
 
-## Developing
+## Step 2
 ```bash
 npm run dev
 ```
