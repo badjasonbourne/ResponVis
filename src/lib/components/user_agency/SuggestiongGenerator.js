@@ -43,7 +43,7 @@ class SuggestionsGenerator {
                     `${currentSug.fadingElement} in ${currentSug.viewName} ${currentSug.operator} 
                     ${currentSug.threshold}, which means ${currentSug.issue}`,
                 suggestedReason:
-                    `I recommend you to switch to ${bestSug.viewName}, ${bestSug.advantage}`,
+                    `${bestSug.advantage}`,
                 treadoff: this.tradeoffMatrix[currentView][bestView]
             };
             return;

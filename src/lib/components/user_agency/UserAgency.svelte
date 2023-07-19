@@ -67,14 +67,14 @@
 					<div class="suggestion" style="width: 300px;">
 						{#if currentView < bestView}
 							<div class="suggestion-detail">
-								<p style="font-size: 14px; font-weight: bold; color: #CB2634">Why you need to change the current view</p>
+								<p style="font-size: 14px; font-weight: bold; color: #CB2634">We recommend that you change the current view.</p>
 								<p style="font-size: 12px; color: #CB2634">
 									{suggestion.conditionIssue}
 								</p>
 							</div>
 						{/if}
 						<div class="suggestion-detail">
-							<p style="font-size: 14px; font-weight: bold; color: #009A29">Why you need to choose {views[bestView]}</p>
+							<p style="font-size: 14px; font-weight: bold; color: #009A29">We recommend that you switch to the {views[bestView]} view</p>
 							<p style="font-size: 12px; color: #009A29">
 								{suggestion.suggestedReason}
 							</p>

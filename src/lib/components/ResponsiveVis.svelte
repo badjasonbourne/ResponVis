@@ -154,6 +154,8 @@
 			<Indicator 
 				status={status} 
 				on:indicator-clicked={handleIndicatorClicked}
+				currentView={currentViewIndex}
+				bestView={bestViewIndex}
 			> </Indicator>
 			{#each spec.views as view, i}
 				<svelte:component

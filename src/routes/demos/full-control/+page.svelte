@@ -116,7 +116,7 @@
 					threshold: "5px",
 					operator: "<",
 					issue: "it is difficult to get a good look at each area",
-					advantage: "It can balance geographic data with election data."
+					advantage: "The hex map balances geographic data with election data by removing geographical boundary information and representing each constituency as a hexagon."
 				}
 			},
 			{
