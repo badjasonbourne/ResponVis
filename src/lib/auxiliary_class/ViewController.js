@@ -1,36 +1,22 @@
 class ViewController {
   constructor() {
     this.mode = 'system';
-    this.finalDisplay = undefined;
-    this.prevDisplay = undefined;
+    this.finalDisplay = 0;
+    this.prevIdealDisplay = 0;
+    this.prevDisplay = 0;
   }
 
-  modeSwitch(shown, choice="confirm") {
-    if (shown){
-        if (choice == "confirm") {
-            this.mode = 'system';
-        } 
-        if (choice == "cancel") {
-            this.mode = 'user';
-        }
-    } else {
-        this.mode = 'system';
-    }
+
+  setPrevIdealDisplay(display) {
+    this.prevIdealDisplay = display;
   }
 
   setPrevDisplay(display) {
-    if (this.mode == "system"){
-      this.prevDisplay = display;
-    }
+    this.prevDisplay = display;
   }
 
   setFinalDisplay(display) {
-    if (this.mode == 'system') {
-        this.finalDisplay = display;
-    }
-    if (this.mode == 'user') {
-        this.finalDisplay = this.prevDisplay;
-    }
+    this.finalDisplay = display;
   }
 
 }

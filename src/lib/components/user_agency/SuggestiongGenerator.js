@@ -49,7 +49,7 @@ class SuggestionsGenerator {
             return;
         } else {
             this.suggestions = {
-                suggestedReason:`There is a more detailed view (${bestSug.viewName}) you can use. ${bestSug.advantage}`,
+                suggestedReason:`There is a more detailed view (${bestSug.viewName}) you can use, since ${bestSug.advantage}`,
                 treadoff: ""
             };
             return;

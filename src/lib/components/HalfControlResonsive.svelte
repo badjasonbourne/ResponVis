@@ -1,11 +1,13 @@
 <script>
 	import { range, schemeOrRd, schemeSet3 } from 'd3';
 	import { afterUpdate, onMount } from 'svelte';
-	import ControlPanel from './ControlPanel.svelte';
+	import Modal from './Modal.svelte';
 	import ViewController from '../auxiliary_class/ViewController';
 
+	let viewController = new ViewController();
+
 	let detailedDesc = [
-		"The minimum area in this ChoroplethMap is now less than 2px",
+		"The minimum area in this ChoroplethMap is now less than 2px, which means small urban constituencies being undetectable when scaled down",
 		"The minimum hexagonal area in this Hexmap is now less than 5px",
 		"The maximum aspect ratio is larger that 1"
 	]
@@ -20,19 +22,37 @@
 	let test;
 	$: test;
 
+	let current_desc;
+	$ : current_desc;
+
+	let show = false;
+	$: show;
+
 	let display = undefined;
 	let prevDisplay = null; // a variable to store the previous value of display
 	let display_change = 0;
 	let finalDisplay;
 	$: finalDisplay;
 
-	let current_desc;
-	$ : current_desc;
+	const handleModalCancel = () => {
+		// viewController.modeSwitch(show, "cancel");
+		// viewController.setFinalDisplay(display);
+		// finalDisplay = viewController.finalDisplay;
+		viewController.setFinalDisplay(viewController.prevDisplay);
+		finalDisplay = viewController.finalDisplay;
+		viewController.setPrevDisplay(finalDisplay);
+		show = false;
+		console.log("the mode is :" + viewController.mode);
+	}
 
-
-	let recommendedIndex = 0;
-	$: recommendedIndex;
-
+	const handleModalConfirm = () => {
+		// viewController.modeSwitch(show, "confirm");
+		viewController.setFinalDisplay(display);
+		finalDisplay = viewController.finalDisplay;
+		viewController.setPrevDisplay(finalDisplay);
+		show = false;
+		console.log("the mode is :" + viewController.mode);
+	}
 
 	export let spec; // must be provided and contains data and parameters for each view state
 	export let computeViewLandscape = true;
@@ -60,12 +80,28 @@
 	$: {
 		display = conditions.findIndex((d) => d);
 		display_change = display_change + 1;
+		if (display_change <= 4) {
+			viewController.setFinalDisplay(display);
+		}
+		finalDisplay = viewController.finalDisplay;
 	}
 
-	// Change recommendedIndex
+	// Show the Modal
 	$: {
 		if (prevDisplay !== null && display !== prevDisplay && display_change > 3) {
-			recommendedIndex = display;
+			viewController.setFinalDisplay(display);
+			finalDisplay = viewController.finalDisplay;
+			if (display != viewController.prevDisplay) {
+				if (display > prevDisplay){
+					current_desc = detailedDesc[prevDisplay];
+					show = true;
+				} else {
+					if (viewController.mode != "user") {
+						current_desc = "There is a more detailed view";
+						show = true;
+					}
+				}
+			}
 		}
 		prevDisplay = display;
 	}
@@ -122,13 +158,9 @@
 		viewLandscape = { mode: 'dynamic', dataArray: arr, dataURL, size: [w, h] };
 	}
 
-	
 </script>
 
-<div style="display: flex; flex-direction: column">
-	<div id="modal">
-		<ControlPanel w={width} bind:finalDis={finalDisplay} recommendedIndex={recommendedIndex}/>
-	</div>
+<div style="display: flex; flex-direction: row">
 	<div id="outer-container">
 		<div
 			id="container"
@@ -156,6 +188,10 @@
 		</div>
 		<!-- slot for optional overlay -->
 		<slot />
+	</div>
+    <div id="modal">
+		<Modal open={show} on:close={handleModalCancel} on:confirm={handleModalConfirm} desc={current_desc}
+			display={finalDisplay} w={width} spec={spec}></Modal>
 	</div>
 </div>
 

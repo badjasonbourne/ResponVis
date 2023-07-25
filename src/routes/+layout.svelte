@@ -20,6 +20,7 @@
 	<h1>Data-driven Breakpoints for Responsive Visualization</h1>
 	<div>
 		<a href="{base}/demos/full-control">full control</a>
+		<a href="{base}/demos/half-control">semi control</a>
 	</div>
 </div>
 

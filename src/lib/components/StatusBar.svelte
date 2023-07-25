@@ -19,13 +19,16 @@
 		Resize the container using the handle in the botton right and watch the visualization update
 			(Chrome/Firefox only).
 
-	<ul>	
-		<li>width: {width} px</li>
-		<li>height: {height} px</li>
-		<li>Aspect ratio: {divAR}</li>
-		<li>Area: {divArea} px</li>
-		<li />
-	</ul>
+
+	<!-- 
+		<ul>	
+			<li>width: {width} px</li>
+			<li>height: {height} px</li>
+			<li>Aspect ratio: {divAR}</li>
+			<li>Area: {divArea} px</li>
+			<li />
+		</ul>
+	-->		
 
 	<p>
 		<Checkbox labelText="Show view landscape overlay" bind:checked={landscapeOverlay} id="overlay"/>

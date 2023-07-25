@@ -4,7 +4,7 @@
   
     export let open = false;
     export let w = "200px";
-    export let desc = "I recommend you to change the view";
+    export let spec;
     let views = ["ChoroplethMap", "Hexmap", "WaffleChart", "WaffleChart"];
     export let display;
   
@@ -25,29 +25,73 @@
   
 {#if open}
 <div class="modal" style="width: {width}">
-    <p>{desc}, I recommend that you switch to {views[display]}</p>
+    <p>The view has changed to {spec.views[display].viewSugData.viewName}, this is because {spec.views[display].viewSugData.advantage}</p>
     <div class="modal-operation">
-        <button on:click={confirmModal}>Switch to {views[display]}</button>
-        <button on:click={closeModal}>Keep the current view</button>
+        <button class="switch2bestView-button" on:click={confirmModal}>Switch to {views[display]}</button>
+        <button class="keep-currentView-button" on:click={closeModal}>Keep the current view</button>
     </div>
 </div>
 {/if}
 
 <style>
-.modal {
-    border: 1px solid black;
-    padding: 12px;
-    background: white;
-    border-radius: 5px;
-}
+    .modal {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 1em;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #fafafa;
+        width: auto;
+    }
 
-.modal-operation {
-    display: flex;
-    margin-top: 16px;
-    gap: 12px;
-}
+    .modal-operation {
+        display: flex;
+        margin-top: 16px;
+        gap: 12px;
+    }
 
-p {
-    font-size: 14px;
-}
+    .switch2bestView-button{
+        background-color: #12ad39;
+        color: white;
+        border: 1px solid #12ad39;
+        border-radius: 4px;
+        padding: 10px 24px;
+        text-align: center;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .switch2bestView-button:hover {
+		background-color: white; 
+		color: #12ad39; 
+		border: 1px solid #12ad39;
+	}
+
+    .keep-currentView-button {
+		background-color: #3f51b5;
+		color: white;
+		border: 1px solid #3f51b5;
+		border-radius: 4px;
+		padding: 10px 24px;
+		text-align: center;
+		display: inline-block;
+		font-size: 12px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+    .keep-currentView-button:hover {
+		background-color: white; 
+		color: #3f51b5; 
+		border: 1px solid #3f51b5;
+	}
+
+    p {
+        font-size: 14px;
+    }
 </style>
